@@ -1,0 +1,20 @@
+{
+  "languages": {
+    "en": "en",
+    "es": "",
+    "fr": "",
+    "it": ""
+  },
+  "enter_email": {
+    "en": "Please enter your email in the following form",
+    "es": "Ingrese su correo electrónico en el siguiente formulario",
+    "fr": "Veuillez saisir votre e-mail dans le formulaire suivant",
+    "it": "Inserisci la tua email nel seguente modulo"
+  },
+  "about": {
+    "en": "About",
+    "es": "Acerca de",
+    "fr": "À propos",
+    "it": "Di"
+  }
+}

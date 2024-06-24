@@ -1,0 +1,28 @@
+{
+  "name": "translation",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon --watch src/addTranslation.ts --exec npm run watch-ts",
+    "watch-ts": "npm run build && npm run start-node",
+    "build": "tsc",
+    "start-node": "node dist/addTranslation.js",
+    "add-translation": "node dist/addTranslation.js",
+    "add-language": "node dist/addLanguage.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/chalk": "^2.2.0",
+    "@types/node": "^20.14.6",
+    "nodemon": "^3.1.4",
+    "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "pupeteer": "^0.0.1",
+    "puppeteer": "^22.11.2"
+  }
+}
