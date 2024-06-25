@@ -1,6 +1,6 @@
 import puppeteer from 'puppeteer';
 export async function getTranslation(inputLanguage, textToTranslate, language) {
-    const browser = await puppeteer.launch({ headless: true });
+    const browser = await puppeteer.launch({ headless: false });
     const page = await browser.newPage();
     try {
         textToTranslate = textToTranslate.replace(/ /g, '+');
@@ -12,11 +12,8 @@ export async function getTranslation(inputLanguage, textToTranslate, language) {
             await page.waitForSelector('.ryNqvb', { timeout: 5000 }); // Timeout de 5 segundos
             const text = await page.evaluate(() => {
                 const textContainers = document.querySelectorAll('.ryNqvb');
-                let concatText = '';
-                textContainers.forEach((textContainer) => {
-                    concatText += textContainer.textContent?.trim() ?? '';
-                });
-                return concatText;
+                const firstContainer = textContainers[0];
+                return firstContainer.textContent?.trim() ?? '';
             });
             return text;
         }

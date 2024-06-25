@@ -4,16 +4,22 @@ import chalk from 'chalk';
 import { createRequire } from 'module';
 import fs from 'fs';
 import { getTranslation } from './translate.js';
+import cliSpinners from 'cli-spinners';
 // Import the translations JSON
 const require = createRequire(import.meta.url);
 const translationsJSON = require('../assets/translations.json');
 // Get the language list ({ prefix, value }) ---> { 'en' : 'English }
+const spinner = cliSpinners.clock;
+const interval = setInterval(() => {
+    process.stdout.write(`\r${spinner.frames[Date.now() % spinner.frames.length]} Getting available...`);
+}, spinner.interval);
 const languages = await getLanguages();
 // Parse languages into an array of objects 
 const languagesArray = Object.entries(languages).map(([prefix, language]) => ({ prefix, language }));
 // Delete auto-detect language
 languagesArray.shift();
-console.log(chalk.blue("This are the available languages:"));
+clearInterval(interval);
+process.stdout.write(`\r${chalk.green('This are the available languages:')}\n`);
 languagesArray.forEach(language => {
     console.log(language);
 });
@@ -47,7 +53,9 @@ function askLanguagePrefix() {
     });
 }
 const answer = await askLanguagePrefix();
-console.log(chalk.yellow('Selected prefix:', answer));
+const interval2 = setInterval(() => {
+    process.stdout.write(`\r${spinner.frames[Date.now() % spinner.frames.length]} Language selected: ${answer}`);
+}, spinner.interval);
 rl.close();
 // Add the prefix to every translation key:
 for (let key in translationsJSON) {
@@ -61,6 +69,7 @@ for (const item of englishWords) {
     translationsJSON[translationKey][answer] = translation;
 }
 fs.writeFileSync('./assets/translations.json', JSON.stringify(translationsJSON, null, 2));
-console.log(chalk.italic("Language added correctly"));
+clearInterval(interval2);
+process.stdout.write(`\r${chalk.green.italic('Language added successfully!')}\n`);
 process.exit();
 //# sourceMappingURL=addLanguage.js.map

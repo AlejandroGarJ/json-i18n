@@ -4,5 +4,22 @@ _Node.js library for efficiently handling JSON translations. Use Puppeteer with 
 
 ## Starting 🚀
 
-_Estas instrucciones te permitirán obtener una copia del proyecto en funcionamiento en tu máquina local para propósitos de desarrollo y pruebas._
+_This instructions will able you to install this translations package on your proyect_
 
+### Prerequisites
+
+What things you need to install the software and how to install them:
+- Node.js (version >= 12.0.0)
+- npm (Node Package Manager)
+
+## Installation
+
+You can install `json-i18n-gt` using npm:
+
+```bash
+npm install json-i18n-gt
+
+Install all the dependencies: 
+
+```bash
+npm install 

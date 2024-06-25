@@ -1,5 +1,12 @@
 {
-    "languages": {
-        "en": "en"
-    }
+  "languages": {
+    "en": "en",
+    "es": "",
+    "it": ""
+  },
+  "im_good": {
+    "en": "Im good",
+    "es": "Soy bueno",
+    "it": "Sto bene"
+  }
 }

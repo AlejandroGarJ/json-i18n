@@ -1,6 +1,7 @@
 import chalk from 'chalk';
 import readline from 'readline';
 import fs from 'fs';
+import cliSpinners from 'cli-spinners';
 // Import de translations JSON
 import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
@@ -20,11 +21,16 @@ function askTranslationKey() {
         else {
             console.log(chalk.green('Translation key correct'));
             rl.question(chalk.blue('Enter the text value in English: '), async (englishText) => {
+                const spinner = cliSpinners.clock;
+                const interval = setInterval(() => {
+                    process.stdout.write(`\r${spinner.frames[Date.now() % spinner.frames.length]} Translating...`);
+                }, spinner.interval);
                 translationsJSON[answer] = { 'en': englishText };
                 for (let lang in translationsJSON.languages) {
                     if (lang !== 'en') {
                         const translation = await getTranslation('en', englishText, lang);
                         translationsJSON[answer][lang] = translation;
+                        console.log(translation);
                     }
                 }
                 fs.writeFile(translationsPath, JSON.stringify(translationsJSON, null, 2), (err) => {
@@ -32,7 +38,8 @@ function askTranslationKey() {
                         console.error(chalk.red(`Error writing translations file: ${err.message}`));
                     }
                     else {
-                        console.log(chalk.green('Translation added successfully!'));
+                        clearInterval(interval);
+                        process.stdout.write(`\r${chalk.green('Translation completed succesfully!')}\n`);
                     }
                     rl.close();
                 });
