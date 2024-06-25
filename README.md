@@ -55,3 +55,17 @@ First you will have to write the translation key that you want, then the text in
 npm run add-language
 ```
 This will show a list of the available languages (133). Next you will have to write the language prefix (it is shown in the language list).
+
+
+## Note 📝
+
+By default, `json-i18n-gt` stores translations in a JSON file (`translations.json`) located within the `node_modules/json-i18n-gt/assets` directory. Since `node_modules` is typically ignored by Git via `.gitignore`, it's important to include the translations file in version control manually.
+
+### Adding translations.json to .gitignore
+
+To ensure that `translations.json` is included in version control, add the following line to your project's `.gitignore` file:
+
+```plaintext
+!node_modules/json-i18n-gt/assets/translations.json
+```
+This problem will be solved in future updates.
