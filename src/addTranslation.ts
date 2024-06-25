@@ -20,10 +20,10 @@ function askTranslationKey() {
             console.log(chalk.red('Translation key already exists'));
             askTranslationKey(); // Call the function recursively 
         } else {
+
+            // Translation key isnt repeated
             console.log(chalk.green('Translation key correct'));
-
             rl.question(chalk.blue('Enter the text value in English: '), async (englishText) => {
-
                 const spinner = cliSpinners.clock;
                 const interval = setInterval(() => {
                     process.stdout.write(`\r${spinner.frames[Date.now() % spinner.frames.length]} Translating...`);
@@ -32,9 +32,10 @@ function askTranslationKey() {
                 translationsJSON[answer] = { 'en': englishText };
                 for (let lang in translationsJSON.languages) {
                     if (lang !== 'en') {
+                        console.log(englishText);
                         const translation = await getTranslation('en', englishText, lang);
                         translationsJSON[answer][lang] = translation;
-                        console.log(translation);
+
                     }
                 }
 

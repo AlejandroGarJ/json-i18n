@@ -1,7 +1,7 @@
 import puppeteer from 'puppeteer';
 
 export async function getTranslation(inputLanguage: string, textToTranslate: string, language: string): Promise<string> {
-    const browser = await puppeteer.launch({ headless: false });
+    const browser = await puppeteer.launch({ headless: true });
     const page = await browser.newPage();
 
     try {
@@ -12,7 +12,7 @@ export async function getTranslation(inputLanguage: string, textToTranslate: str
         await page.click('.VfPpkd-LgbsSe.VfPpkd-LgbsSe-OWXEXe-k8QpJ.VfPpkd-LgbsSe-OWXEXe-dgl2Hf.nCP5yc.AjY5Oe.DuMIQc.LQeN7.XWZjwc');
 
         try {
-            await page.waitForSelector('.ryNqvb', { timeout: 5000 }); // Timeout de 5 segundos
+            await page.waitForSelector('.ryNqvb', { timeout: 5000 });
             const text = await page.evaluate(() => {
                 const textContainers = document.querySelectorAll('.ryNqvb');
                 const firstContainer = textContainers[0];
@@ -21,8 +21,8 @@ export async function getTranslation(inputLanguage: string, textToTranslate: str
             });
             return text;
         } catch (error) {
-            /*If the translations has two gender types, it will do this, for example im good in spanish has to translations: 
-            'Soy bueno' and 'Soy buena' we take the masculine one*/
+            /*If the translations has two gender types, it will do this, for example 'You are good' in spanish has to translations: 
+            'Eres bueno' and 'Eres buena' we take the masculine one*/
             await page.waitForSelector('.HwtZe');
             const text = await page.evaluate(() => {
                 const textContainers = document.querySelectorAll('.HwtZe');
@@ -35,7 +35,7 @@ export async function getTranslation(inputLanguage: string, textToTranslate: str
         }
 
     } catch (error) {
-        console.error('Error durante la obtención de la traducción:', error);
+        console.error('Error while obtaining the translations', error);
         return '';
     } finally {
         await browser.close();

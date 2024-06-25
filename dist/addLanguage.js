@@ -11,7 +11,7 @@ const translationsJSON = require('../assets/translations.json');
 // Get the language list ({ prefix, value }) ---> { 'en' : 'English }
 const spinner = cliSpinners.clock;
 const interval = setInterval(() => {
-    process.stdout.write(`\r${spinner.frames[Date.now() % spinner.frames.length]} Getting available...`);
+    process.stdout.write(`\r${spinner.frames[Date.now() % spinner.frames.length]} Getting available languages...`);
 }, spinner.interval);
 const languages = await getLanguages();
 // Parse languages into an array of objects 

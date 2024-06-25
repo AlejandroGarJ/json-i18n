@@ -19,6 +19,7 @@ function askTranslationKey() {
             askTranslationKey(); // Call the function recursively 
         }
         else {
+            // Translation key isnt repeated
             console.log(chalk.green('Translation key correct'));
             rl.question(chalk.blue('Enter the text value in English: '), async (englishText) => {
                 const spinner = cliSpinners.clock;
@@ -28,9 +29,9 @@ function askTranslationKey() {
                 translationsJSON[answer] = { 'en': englishText };
                 for (let lang in translationsJSON.languages) {
                     if (lang !== 'en') {
+                        console.log(englishText);
                         const translation = await getTranslation('en', englishText, lang);
                         translationsJSON[answer][lang] = translation;
-                        console.log(translation);
                     }
                 }
                 fs.writeFile(translationsPath, JSON.stringify(translationsJSON, null, 2), (err) => {
