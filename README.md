@@ -18,8 +18,40 @@ You can install `json-i18n-gt` using npm:
 
 ```bash
 npm install json-i18n-gt
+```
 
-Install all the dependencies: 
+Install all the dependencies:
 
 ```bash
-npm install 
+npm install
+```
+
+## Usage ⌨️
+
+You can use `json-i18n-gt` to translate JSON keys from English to any other language available on Google Translator. It works directly from cli commands, adding the translation key and the english text, it will translate it to de languages selected. It starts with spanish, the JSON structure is this:
+```json
+{
+  "languages": {
+    "en": "en",
+    "es": ""
+  },
+  "translation_key": {
+  "en": "english_text_input",
+  "es": "spanish_translation"
+  }
+}
+```
+
+### Add a new Tanslation
+
+```bash
+npm run add-translation
+```
+First you will have to write the translation key that you want, then the text in english. This text will be translated into the languages that you have inside "languages".
+
+### Add a new Language
+
+```bash
+npm run add-language
+```
+This will show a list of the available languages (133). Next you will have to write the language prefix (it is shown in the language list).
