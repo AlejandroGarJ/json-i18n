@@ -15,9 +15,11 @@ export async function getTranslation(inputLanguage: string, textToTranslate: str
             await page.waitForSelector('.ryNqvb', { timeout: 5000 });
             const text = await page.evaluate(() => {
                 const textContainers = document.querySelectorAll('.ryNqvb');
-                const firstContainer = textContainers[0];
-                return firstContainer.textContent?.trim() ?? '';
-
+                let concatenatedText = '';
+                textContainers.forEach(container => {
+                    concatenatedText += (container.textContent?.trim() ?? '') + ' ';
+                });
+                return concatenatedText.trim();
             });
             return text;
         } catch (error) {
